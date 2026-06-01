@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. CSS 기본</title>
+    <style>
+      h2 {
+        color: blueviolet;
+        font-size: 15px;
+      }
+      
+      /* 주석 표기 */
+      p{
+        color: #555;
+      }
+    </style>
+
+    <!-- 외부 스타일 시트 불러오기(내부 스타일, 외부 스타일 우선순위는 같음, 순서상 외부 스타일 시트가 뒤에 있어 덮어쓴것) -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>CSS 적용 방법</h1>
+
+    <!-- 방법 1. 인라인 스타일: 태그에 직접 style 속성을 지정 -->
+    <h2 style="color: blue; font-size: 30px;">인라인 스타일</h2>
+    <p style="font-weight: bold;">이 라인은 인라인 스타일로 굵게 표시 됩니다.</p>
+
+    <!-- 방법 2. 내부 스타일 시트 -->
+    <h2>내부 스타일 시트</h2>
+    <p>이 라인은 내부 스타일 시트 규칙&lt;style&gt;으로 만들어&nbsp;&nbsp;&nbsp; 졌습니다.</p>
+
+    <!-- 방법 3. 외부 스타일 시트 -->
+    <h2>외부 스타일 시트</h2>
+  </body>
+</html>
