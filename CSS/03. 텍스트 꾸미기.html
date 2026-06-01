@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <title>03. 텍스트 꾸미기</title>
+    <style>
+      body {
+        color: #333;
+      }
+      .f-malgun {
+        color: blue;
+        font-family: "맑은 고딕";
+      }
+      .f-gulim {
+        color: red;
+        font-family: "Dongle","굴림","궁서";
+      }
+      .size-big {
+        font-size: 30px;
+      }
+      .bold {
+        /* bold = 700 */
+        font-weight: bold;
+      }
+      .italic {
+        font-style: italic;
+      }
+      .underline {
+        text-decoration: underline;
+      }
+      .upper {
+        text-transform: capitalize;
+      }
+      .spaced {
+        letter-spacing: 5px;
+      }
+      .no-deco {
+        text-decoration: none;
+      }
+      .center {
+        /* 가운데 정렬 */
+        text-align: center;
+      }
+      .right {
+        /* 오른쪽 정렬 */
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>텍스트 꾸미기</h1>
+    <h2>글꼴 종류</h2>
+    <p class="f-malgun">맑은 고딕</p>
+    <p class="f-gulim">굴림</p>
+
+    <h2>글자 굵기, 크기, 기울임</h2>
+    <p class="size-big bold">글자 크기가 크고 볼드체</p>
+    <p class="italic">기울어진 글자</p>
+
+    <h2>글자 색깔</h2>
+    <p style="color: red;">빨간 글자 입니다.</p>
+
+    <h2>텍스트 효과</h2>
+    <p class="underline">밑줄 친 문장</p>
+    <p class="upper">hello world</p>
+    <p class="spaced">자간을 넓힌 문장</p>
+    <p><a href="#" class="no-deco">밑줄을 없앤 링크</a></p>
+
+    <h2>문단 정렬</h2>
+    <p class="center">가운데 정렬된 문단</p>
+    <p class="right">오른쪽 정렬된 문단</p>
+  </body>
+</html>
