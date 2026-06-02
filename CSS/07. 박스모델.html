@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07. 박스모델</title>
+    <style>
+      .box {
+        width: 200px;
+        background-color: skyblue;
+        border: 4px solid black;
+        border-radius: 20px;
+        padding: 20px 10px 5px 1px;
+        margin: 20px 5px;
+      }
+      .inline {
+        border: 1px solid blue;
+        /* 인라인 요소는 가로세로 크기를 가질 수 없다. */
+        width: 200px;
+        height: 200px;
+        padding: 20px;
+        /* 위아래 마진은 적용되지 않는다. */
+        margin: 20px;
+      }
+      /* 자식 요소 선택 */
+      .menu li{
+        display: inline-block;
+        border: 1px solid red;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>박스모델</h2>
+    <div class="box">나는 박스입니다.</div>
+    <div class="box">나는 박스입니다.</div>
+
+    <h3>인라인 요소</h3>
+    <span class="inline">inline1</span>
+    <span class="inline">inline2</span>
+    <span class="inline">inline3</span>
+
+    <h3>인라인-블럭 요소</h3>
+    <ul class="menu">
+      <li>홈</li>
+      <li>소개</li>
+      <li>메뉴</li>
+      <li>문의</li>
+    </ul>
+  </body>
+</html>
