@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. 반응형 웹(미디어쿼리)</title>
+    <style>
+      div {
+        background-color: yellow;
+        height: 500px;
+      }
+
+      @media (max-width:599px) {
+        div {
+          background-color: blueviolet;
+        }
+      }
+      @media (min-width: 600px) and (max-width: 1199px) {
+        div {
+          background-color: aqua;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
