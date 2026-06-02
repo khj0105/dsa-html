@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08. 시맨틱 태그</title>
+    <style>
+      body {
+        margin: 0px;
+      }
+      header {
+        background-color: blueviolet;
+        padding: 20px;
+        color: white;
+        font-weight: bold;
+      }
+      nav {
+        padding: 6px;
+        background-color: lightgray;
+      }
+      nav li {
+        display: inline-block;
+        margin-right: 20px;
+        font-weight: bold;
+      }
+      main {
+        padding: 10px;
+        display: flex;
+      }
+      /* article {
+        display: inline-block;
+        width: 65%;
+        height: 200px;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: antiquewhite;
+      } */
+      article {
+        background-color: antiquewhite;
+        border-radius: 10px;
+        width: 72.5%;
+        /* padding을 width안에 포함시켜서 길이를 계산 */
+        /* width:300px은 콘텐츠가 300px임 */
+        box-sizing: border-box;
+        margin-right: 1.5%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      /* aside {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 25%;
+        height: 140px;
+        margin-left: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: bisque;
+      } */
+      aside {
+        padding: 15px;
+        background-color: aquamarine;
+        border-radius: 10px;
+        width: 25%;
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+      }
+      /* footer {
+        display: inline-block;
+        width: 100%;
+        height: 100px;
+        text-align: center;
+        background-color: gray;
+        color: white;
+      } */
+      footer {
+        background-color: gray;
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header: 페이지의 머리말(로고, 사이트 제목) -->
+    <header>
+      <h1>맛집 블로그</h1>
+    </header>
+
+    <!-- nav: 메뉴(네비게이션) -->
+    <nav>
+      <ul>
+        <li>홈</li>
+        <li>소개</li>
+        <li>글 목록</li>
+        <li>연락처</li>
+      </ul>
+    </nav>
+
+    <!-- main: 페이지의 핵심 콘텐츠, 페이지에서 한 번만 사용 -->
+    <main>
+      <!-- article: 독립적인 글 단위 -->
+      <article>
+        <h2>오늘의 추천: 동네 김밥집</h2>
+        <p>
+          골목 안에 숨어 있는 작은 김밥집을 소개합니다.
+          재료가 신선하고 가격도 착해서 자주 찾게 되는 곳입니다.
+        </p>
+        <!-- time: 기계가 읽을 수 있는 날짜 형식을 표시 -->
+        <p>작성일: <time datetime="2026-06-02">2026년 6월 2일</time></p>
+      </article>
+      <!-- aside: 본문과 직접 관련은 적은 보조 컨텐츠 -->
+      <aside>
+        <h3>인기글</h3>
+        <ul>
+          <li>분식 베스트</li>
+          <li>혼밥 맛집 지도</li>
+        </ul>
+      </aside>
+    </main>
+
+    <!-- footer: 꼬리말(저작권, 연락처, 관련 링크) -->
+    <footer>
+        <p>&copy; 2026 맛집 블로그, All rights reserved.</p>
+    </footer>
+  </body>
+</html>
