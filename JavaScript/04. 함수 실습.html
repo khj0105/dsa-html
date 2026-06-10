@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. 함수 실습</title>
+    <script>
+      // [문제 1.] 가로(w) 세로(h)를 받아 넓이를 변환하는 함수 area를 완성하시오.
+      //console.log(area(5, 3));
+      
+      function area(w, h) {
+        return w * h;
+      }
+      console.log(area(5, 3));
+
+      // [문제 2.] 인수가 없으면 "Guest"가 쓰이도록 완성하시오.
+      // console.log(greet("Alice")) // Hello Alice!
+      // console.log(greet()) // Hello, Guest!
+
+      function greet(name = "Guest") {
+        return `Hello ${name}!`;
+      }
+      console.log(greet("Alice"));
+      console.log(greet());
+
+      // [문제 3.] 다음 함수를 화살표 함수로 바꾸세요
+      function half(x) {return x / 2}
+      const half2 = x => x / 2;
+      // console.log(half2(3));
+
+      // [문제 4.] callback을 n번 호출하는 함수 repeat(n, callback)을 완성하세요
+      // function repeat(n, callback) {}
+      // repeat(3, () => console.log("안녕!")); -> "안녕!"이 3번 출력
+
+      function repeat(n, callback) {
+        for (let i = 0; i < n; i++) {
+          callback();
+        }
+      }
+
+      repeat(3, () => console.log("안녕!")); 
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
