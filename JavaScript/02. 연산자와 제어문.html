@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02. 연산자와 제어문</title>
+  </head>
+  <body>
+    <script>
+      // 산술연산자, 비교연산자 (생략)
+      // 문자열 이어붙이기
+      let greeting = 'Hello,';
+      let name = 'Alice';
+      console.log(greeting, name); // Hello, Alice
+      console.log(greeting + name); // Hello,Alice
+      console.log(5 + 5); // 10
+      console.log(5 + '5', typeof (5 + '5')); // 55 string
+
+      // 문자열 함수
+      let str = 'Hello, World!';
+      console.log(str.length); // 13
+      console.log(str.charAt(0)); // H
+      console.log(str.charAt(13)); // 아무 값도 출력되지 않음
+      console.log(str.includes('World')); // true
+      console.log(str.indexOf('World')); // 7(시작점) / 없는값 -1 출력
+      console.log(str.substring(0, 5)); // Hello (n, m) [n ~ m-1]
+      console.log(str.toUpperCase()); // HELLO, WORLD!
+      console.log(str.toLowerCase()); // hello, world!
+      console.log(str.replace('World', 'JS')); // Hello, JS!
+      console.log(str); // Hello World! 원본은 변하지 않는다.
+      console.log('a,b,c'.split(',')); // ['a', 'b', 'c']
+
+      // 템플릿 리터럴
+      name = '홍길동';
+      age = 20;
+      console.log('제 이름은 ' + name + '이고, 나이는 ' + age + '살 입니다.');
+      console.log(`제 이름은 ${name}이고, 나이는 ${age}살 입니다.`);
+
+      let multi = '첫번째 줄 \n두번째 줄';
+      console.log(multi);
+      multi = `첫번째 줄
+      
+      두번째 줄`;
+      console.log(multi);
+
+      // 조건문
+      let score = 85;
+      // score = prompt('점수를 입력해주세요');
+      if (score >= 90) {
+        console.log('A등급');
+      } else if (score >= 80) {
+        console.log('B등급');
+      } else {
+        console.log('C등급');
+      }
+
+      // 반복문
+      for (let i = 1; i <= 10; i++) {
+        console.log('i: ' + i);
+      }
+
+      let a = 10;
+      while (true) {
+        console.log(a--);
+        if (a == 0) break;
+      }
+
+      do {
+        if (a == 5) break;
+        console.log(a++);
+      } while (true);
+    </script>
+  </body>
+</html>
