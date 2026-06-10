@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07. 객체와 배열</title>
+    <script>
+      { // object 타입
+        let person = {
+          name: "John",
+          age: 25,
+          greet: function() {
+            console.log("Hello");
+          },
+        };
+        // console.log(person);
+        // 속성 접근
+        console.log(person.name); // 점 표기법
+        console.log(person["age"]); // 대괄호 표기법
+        person.greet();
+      };
+
+      // 객체 생성 후에 속성을 자유롭게 더하거나 바꿀 수 있다.
+      {
+        let book = {}; // 빈 객체
+        book.title = "JS";
+        book["price"] = 25000;
+        //console.log(book);
+
+        let key = "author";
+        book[key] = "홍길동";
+        console.log(book); // key는 변수이기 때문에 .점 표기법이 아닌 대괄호로 사용
+      };
+
+      // for..in 객체 순회
+      {
+        let sports = {soccer: "축구", baseball: "야구"}
+        for (let key in sports) {
+          console.log(key, ":", sports[key]);
+        }
+      };
+
+      // 배열: 값들을 순서대로 담는 상자, 인덱스를 가짐
+      {
+        let fruits = ["apple", "banana", "orange"];
+        console.log(fruits[0]);
+        console.log(fruits[2]);
+        console.log(fruits.length); // 요소 개수
+     
+
+      // 반복문을 통한 배열 참조
+      for (let i = 0; i < fruits.length; i++) {
+        console.log(fruits[i]);
+      };
+
+      // forEach: 요소를 하나씩 콜백에 넘겨준다.
+      // 콜백은 (요소, 인덱스) 순서로 받음
+      // 인덱스를 생략하면 요소만 받는다.
+
+      // fruits.forEach(fruit => {
+      //   console.log(fruit);
+      // });
+      fruits.forEach(function(fruit, index){
+        console.log(index, fruit);
+      });
+      };
+
+      // 배열 요소 추가/삭제 (push / pop- stack구조)
+      {
+        let fruits = ["apple", "banana"];
+        // 배열 마지막 요소에 cherry를 추가
+        fruits.push("cherry");
+        console.log(fruits);
+
+        // 배열 맨 뒤에서 요소를 빼서 반환
+        let last = fruits.pop();
+        console.log(last);
+        console.log(fruits);
+      }
+
+      // 고차 함수
+      {
+        let numbers = [1,2,3,4,5];
+        
+        // map: 각 요소를 반환해서 새 배열을 만든다.
+        console.log(numbers.map((n) =>  n * 2)); // numbers.map(n => {return n * 2})랑 같음
+
+        // filter: 조건이 true 요소만 걸러내서 새 배열을 만든다.
+        console.log(numbers.filter(n => n % 2 == 0));
+
+        // reduce: 요소의 값을 하나로 누적 acc=누적값, cur=현재요소, 0=초기값
+        console.log(numbers.reduce((acc, cur) => acc + cur, 0));
+
+        // find: 조건에 맞는 첫 요소를 반환
+        console.log(numbers.find(n => n > 3));
+
+        // some: 하나라도 만족하면 true
+        console.log(numbers.some(n => n >= 5));
+
+        // every: 모두 만족해야 true
+        console.log(numbers.every(n => n <= 8));
+      }
+
+      // 구조 분해 할당 []사용
+      // 배열이나 객체의 값을 순서대로 변수에 한번에 할당
+      {
+        let numbers = [1, 2, 3];
+        // let first = numbers[0];
+        // let second = numbers[1];
+        // let third = numbers[2]; 이렇게 가능도 함
+        const [first, second, third] = numbers;
+        console.log(first, second, third);
+
+        const [a, , c] = [10, 20, 30];
+        console.log(a, c);
+
+        // 값이 없으면 기본값 할당
+        const [x, y = 99] = [5];
+        console.log(x, y);
+      }
+
+      // 객체 구조분해: (객체는 순서가 없음) 객체는 순서가 아니라 키 이름으로 꺼낸다. {}사용
+      {
+        const person = {name: "John", age: 30}
+        const {name, age} = person
+        console.log(name, age);
+
+        // name 값을 userName이라는 새 변수로 담는다.
+        const {name: userName} = person;
+        console.log(userName);
+
+        // 매개변수 자리에서 바로 분해 (객체를 받아서 즉시 분해)
+        function greet ({ name, age }) {//(name, age) {
+          console.log(`${name}(${age})`);
+        }
+        // greet(person.name, person.age);
+        greet(person)
+      }
+
+      // 스프레드 연산자 (펼치기)
+      {
+        const arr1 = [1, 2, 3];
+        const arr2 = [...arr1, 4, 5];
+        console.log(arr2);
+
+        const person = {name: "철수", age: 25};
+        const update = {...person, age: 26};
+        console.log(update);
+
+        console.log(Math.max(...[1,2,3,4]));
+      }
+
+      // Rest 매개변수 (모으기)
+      {
+        // 들어온 인자를 전부 nubers 배열로 모은다.
+        function sum(...numbers) {
+          // console.log(numbers);
+          return numbers.reduce((acc, cur) => acc + cur, 0);
+        }
+        // sum(1, 2, 3);
+        // sum(1,2,3,4,5);
+        console.log(sum(1,2,3));
+        console.log(sum(1,2,3,4,5));
+
+        // 첫 인자는 name, 나머지는 hobbies 배열로 받음
+        function introduce(name, ...hobbies) {
+          //console.log(name, hobbies);
+          console.log(`${name}의 취미: ${hobbies.join(",")}`);
+        }
+        introduce("영희", "독서", "운동", "요리");
+      }
+    </script>
+  </head>
+  <body>
+    
+  </body>
+</html>
