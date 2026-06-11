@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>내장 객체 종합 실습 — 회원가입 유효성</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 360px;
+        margin: 28px auto;
+        padding: 0 16px;
+        line-height: 1.6;
+        color: #222;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      form {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 18px;
+      }
+      form p {
+        margin: 0 0 12px;
+      }
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-top: 4px;
+      }
+      button {
+        width: 100%;
+        padding: 9px;
+        font-size: 15px;
+        border: 0;
+        border-radius: 6px;
+        background: #1e88e5;
+        color: #fff;
+        cursor: pointer;
+      }
+      #result {
+        font-weight: bold;
+        margin-top: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>회원가입 유효성 검사</h1>
+
+    <form id="signupForm">
+      <p>이름: <input type="text" id="name" /></p>
+      <p>이메일: <input type="text" id="email" /></p>
+      <p>나이: <input type="text" id="age" /></p>
+      <p>비밀번호: <input type="password" id="password" /></p>
+      <button type="submit">가입하기</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+      // ============================================================
+      //
+      //  ▣ 검사 규칙 (위에서부터, 첫 실패 메시지를 보여줄 것)
+      //    1) 이름이 (공백 제거 후) 비어 있으면     → "이름을 입력하세요"
+      //    2) 이메일에 '@' 또는 '.' 이 없으면       → "올바른 이메일이 아닙니다"
+      //    3) 나이가 숫자가 아니면                  → "나이를 숫자로 입력하세요"
+      //    4) 나이가 14세 미만이면                  → "만 14세 이상만 가입할 수 있습니다"
+      //    5) 비밀번호가 6자 미만이면               → "비밀번호는 6자 이상이어야 합니다"
+      //    6) 모두 통과하면                        → "○○님, 가입 완료!"  (이름 넣기)
+      //
+      // ============================================================
+
+      const form = document.getElementById("signupForm");
+      const result = document.getElementById("result");
+
+      
+      form.addEventListener("submit", (e) => {
+        e.preventDefault(); // 폼 기본 동작(새로고침) 막기
+
+        // 1. 입력창에 적힌 실제 값을 꺼내옵니다. (value 사용!)
+        const nameValue = document.getElementById("name").value;
+
+        // 2. [첫 번째 조건] 앞뒤 공백을 제거(.trim())한 결과가 빈 문자열("")인지 검사합니다.
+        if (nameValue.trim() === "") {
+          result.textContent = "이름을 입력하세요";
+          return; // 💡 중요! 아래쪽 다른 검사(이메일, 나이 등)를 안 하고 여기서 즉시 중단시킵니다.
+        }
+
+        //2.
+        // (위에서 이미 emailValue를 꺼내왔다고 가정합니다)
+        const emailValue = document.getElementById("email").value;
+
+        // 2. [두 번째 조건] 이메일에 '@'가 없거나(||) '.'이 없는지 검사합니다.
+        if (!emailValue.includes("@") || !emailValue.includes(".")) {
+          result.textContent = "올바른 이메일이 아닙니다";
+          return; // 💡 여기서도 탈락하면 즉시 사살(함수 종료)!
+        }
+        //3.
+        // (위에서 이미 ageValue를 꺼내왔다고 가정합니다)
+        const ageValue = document.getElementById("age").value;
+
+        // 3. [세 번째 조건] 나이 입력값이 숫자가 아닌지(Not a Number) 검사합니다.
+        if (isNaN(ageValue) || ageValue.trim() === "") {
+          result.textContent = "나이를 숫자로 입력하세요";
+          return; // 💡 여기서도 탈락하면 즉시 함수 종료!
+        }
+
+        //4.
+        // 4. [네 번째 조건] 문자열인 나이를 진짜 숫자로 변환한 뒤, 14세 미만인지 비교합니다.
+        if (Number(ageValue) < 14) {
+          result.textContent = "만 14세 이상만 가입할 수 있습니다";
+          return; // 💡 여기서도 탈락하면 즉시 함수 종료!
+        }
+
+        //5.
+        // (위에서 이미 passwordValue를 꺼내왔다고 가정합니다)
+        const passwordValue = document.getElementById("password").value;
+
+        // 5. [다섯 번째 조건] 비밀번호 문자열의 길이(.length)가 6자 미만인지 검사합니다.
+        if (passwordValue.length < 6) {
+          result.textContent = "비밀번호는 6자 이상이어야 합니다";
+          return; // 💡 마지막 관문 탈락자도 즉시 함수 종료!
+        }
+
+        //6.
+        // 6. [최종 승리 구간] 모든 성벽을 통과하고 여기까지 무사히 살아남아 내려온 유저에게 도장을 찍어줍니다!
+        result.textContent = `${nameValue}님, 가입 완료!`;
+      });
+    </script>
+  </body>
+</html>
