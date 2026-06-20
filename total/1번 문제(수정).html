@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .name{
+        margin: 15px;
+      }
+      #box1 {
+        width: 500px;
+        height: 650px;
+        border: 1px solid black;
+        box-sizing: border-box;
+      }
+      #time {
+        color: red;
+        margin: 10px;
+        font-weight: bolder;
+      }
+      #box2 {
+        margin: 10px;
+        padding: 10px;
+        width: 460px;
+        height: 300px;
+        border: 1px solid black;
+        box-sizing: border-box;
+      }
+      #box2 input[type="text"] {
+        width: 95%;
+        padding: 4px;
+        margin-bottom: 10px;
+      }
+      #box3{
+        margin: 10px;
+        padding: 10px;
+        width: 460px;
+        height: 140px;
+        border: 1px dotted black;
+        box-sizing: border-box;
+      }
+      .pass-msg {
+        color: green;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .fail-msg {
+        color: red;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1">
+      <p id="time">경과 시간: </p>
+      <h3 class="name"> [ Java 퀴즈 ] </h3>
+      <div id="box2">
+        <p>1. Java에서 클래스를 정의할 때 사용하는 키워드는?</p>
+        <input type="radio" name="q1" id="r1" value="function">
+        <label for="r1" >&#9312;function</label><br />
+        <input type="radio" name="q1" id="r1" value="class">
+        <label for="class">&#9313;class</label><br />
+        <input type="radio" name="q1" id="r1" value="define">
+        <label for="define">&#9314;define</label><br />
+        <input type="radio" name="q1" id="r1" value="object">
+        <label for="object">&#9315;object</label><br />
+        
+        <p>2. 4바이트 크기의 정수형 변수를 선언할 때 사용하는 키워드는?</p>
+        <input type="text" id="q2Input"/><br>
+        <button type="button" id="submitBtn">완료</button>
+      </div>
+      
+      <h3 class="name">[ 결과 ]</h3>
+      <div id="box3">
+        <p id="res1">1번: </p>
+        <p id="res2">2번: </p>
+        <p id="totalScore">총점: </p>
+        <div id="statusMsg"></div>
+      </div>
+    </div>
+
+    <script>
+      // 1. 필요한 DOM 객체 싹 수집하기
+      const timeDisplay = document.getElementById("time");
+      const q2Input = document.getElementById("q2Input");
+      const submitBtn = document.getElementById("submitBtn");
+      
+      const res1 = document.getElementById("res1");
+      const res2 = document.getElementById("res2");
+      const totalScore = document.getElementById("totalScore");
+      const statusMsg = document.getElementById("statusMsg");
+
+      // 2. 타이머 변수 세팅
+      let totalSeconds = 0;
+      
+      // 주 주기적으로 1초마다 안의 함수를 실행시키는 내장 타이머 무기!
+      const timerId = setInterval(() => {
+        totalSeconds++;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        
+        // 초가 10 미만일 때는 앞에 0을 붙여서 '05초' 형태로 이쁘게 포맷팅
+        const formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+        timeDisplay.textContent = `경과 시간: ${minutes}분 ${formattedSeconds}초`;
+      }, 1000);
+
+      // 3. 완료 버튼 클릭 시 채점 이벤트 리스너 장전
+      submitBtn.addEventListener("click", () => {
+        // [타이머 정지] 완료를 누르는 순간 백엔드 스레드 멈추듯 타이머를 차단합니다.
+
+        // --- [STEP 1] 유효성 검사 구간: 성벽 세우기 ---
+        // 1번 라디오 버튼이 체크되었는지 확인
+        const selectedRadio = document.querySelector('input[name="q1"]:checked');
+        // 2번 입력값을 가져와 공백 제거
+        const answer2 = q2Input.value.trim();
+
+        // 💥 [요구사항] 2개의 문제 중 하나라도 답안을 작성하지 않으면 경고창을 띄우고 종료!
+        if (!selectedRadio || answer2 === "") {
+          alert("모든 문항의 답안을 작성해주세요.");
+          return; // 💡 채점을 시작하지 않고 여기서 즉시 튕겨냅니다! (백엔드 Validator 원리)
+        }
+
+        // --- [STEP 2] 채점 시작 구간: 유효성 검사를 통과한 유저만 도달 ---
+        clearInterval(timerId); 
+
+        let score = 0;
+        
+        // --- 1번 문제 채점 ---
+        // 4개의 라디오 버튼 중 현재 체크된(:checked) 녀석을 딱 짚어 긁어옵니다.
+        //const selectedRadio = document.querySelector('input[name="q1"]:checked');
+        
+        if (selectedRadio && selectedRadio.value === "class") {
+          res1.textContent = "1번: O";
+          score += 50;
+        } else {
+         // 💥 [요구사항] 오답인 경우 정답 번호(② 또는 2) 노출하기
+          res1.textContent = "1번: X (정답은 2)";
+        }
+
+        // --- 2번 문제 채점 ---
+        // 입력값을 받아와서 공백을 쳐내고 소문자로 변환하여 'int'와 비교합니다.
+        //const answer2 = q2Input.value.trim().toLowerCase();
+        if (answer2 === "int") {
+          res2.textContent = "2번: O";
+          score += 50;
+        } else {
+          res2.textContent = "2번: X (정답은 int)";
+        }
+
+        // --- 최종 점수 및 합격 판정 주입 ---
+        totalScore.textContent = `총점: ${score}점`;
+
+        if (score >= 50) {
+          statusMsg.innerHTML = '<p class="pass-msg">합격입니다.</p>';
+        } else {
+          statusMsg.innerHTML = '<p class="fail-msg">불합격입니다. 재시험이 필요합니다.</p>';
+        }
+        
+        // 버튼을 한 번 제출하면 더 이상 클릭하지 못하게 비활성화(선택사항)
+        submitBtn.disabled = true;
+      });
+    </script>
+  </body>
+</html>

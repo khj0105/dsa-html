@@ -74,6 +74,24 @@
       console.log(d); // 오차 有
       d = 12345678901234567890n;
       console.log(d, typeof d); // 정상 출력, 'bigint' 타입
+
+      // 참조형 데이터 타입
+      // Object
+      let person = {};
+      console.log(person, typeof person); // {} 'object'
+      person = {
+        // key: value
+        name: '홍길동',
+        age: 25,
+      };
+      console.log(person, typeof person); // {name: '홍길동', age: 25} 'object'
+      person = {
+        name: '홍길동',
+        age: 25,
+        hobby: ['수영', '등산', '독서'], // js 배열은 대괄호로 감싼다
+        greeting: () => console.log('이름: ', name, ', 나이: ', age) // 함수
+      };
+      console.log(person, typeof person); // {name: '홍길동', age: 25, hobby: Array(3), greeting: ƒ} 'object'
     </script>
     <script src="./hello.js" defer></script>
   </head>
